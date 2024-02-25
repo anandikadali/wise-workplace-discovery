@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Information Form</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file for better organization -->
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    #header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #profileDropdown {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #profileCombobox {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #profileOptions {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    #profileCombobox:hover #profileOptions {
+      display: block;
+    }
+
+    #profileOptions a {
+      display: block;
+      padding: 8px;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    #profileOptions a:hover {
+      background-color: #f0f0f0;
+    }
+
+    #searchLocationContainer {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #businessForm {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .button{
+      background-color: green;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px; 
+    }
+    #profileDropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px; /* Adjust as needed for spacing */
+}
+
+#profileDropdownContent {
+    display: inline-block;
+    position: relative;
+    background-color: hwb(132 77% 15%);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+#profileDropdownContent a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+#profileDropdownContent a:hover {
+    background-color: #f4f4f4;
+}
+
+#profileDropdown:hover #profileDropdownContent {
+    display: block;
+    align-items: right;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div id="header">
+    <h1>Business Information Form</h1>
+  </div>
+
+  <div id="profileDropdown">
+  <label> profile</label>
+    <div id="profileDropdownContent">
+      <a href="#">Username</a>
+      <a href="#">Account</a>
+      <a href="eprofile.html">Edit Profile</a>
+      <a id="logoutBtn" href="one.html">Logout</a>
+    </div>
+  </div>
+    <div id="profileOptions">
+      <a href="#" onclick="showDetails('Username')">Username</a>
+      <a href="#" onclick="showDetails('Account')">Account</a>
+      <a href="eprofile.html" onclick="editprofile">Edit Profile</a>
+      <a href="one.html" onclick="logout()">Logout</a>
+    </div>
+  </div>
+
+  <div id="searchLocationContainer">
+    <form id="businessForm">
+      <label for="smallBusinessName">Search for a job:</label>
+      <input type="text" id="smallBusinessName" name="smallBusinessName" required>
+
+      <label for="location">Location:</label>
+      <select id="location" name="location" required>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Pune">Pune</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Mumbai">Mumbai</option>
+      </select>
+      <div class="button">
+      <input type="button" value="Search" onclick="submitForm()">
+       <button><a href="review.html">view review</a></button>
+      
+      </div>
+
+      
+    </form>
+  </div>
+
+  <script src="script.js"></script> <!-- Link to an external JavaScript file for better organization -->
+
+  <script>
+    function handleProfileSelection(selectElement) {
+      var selectedValue = selectElement.value;
+      if (selectedValue !== "") {
+        alert("Selected Profile: " + selectedValue);
+        // Perform specific actions based on the selected profile
+      }
+    }
+  </script>
+</body>
+</html>

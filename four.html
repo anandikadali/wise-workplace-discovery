@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chatbox with Images</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            width: 400px;
+            overflow-y: scroll;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+        }
+
+        .sent {
+            background-color: #4CAF50;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .received {
+            background-color: #ddd;
+            color: black;
+            align-self: flex-start;
+        }
+
+        .profileImage {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #messageInput, #replyInput {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .sendButton {
+            width: 18%;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox"></div>
+
+    <input type="text" id="messageInput" placeholder="Type your message..." oninput="clearValidation('messageInput')">
+    <button class="sendButton" onclick="sendMessage('sent')">Send</button>
+
+    <input type="text" id="replyInput" placeholder="Type your reply..." oninput="clearValidation('replyInput')">
+    <button class="sendButton" onclick="sendMessage('received')">Reply</button>
+
+    <script>
+        function sendMessage(type) {
+            const inputElement = type === 'sent' ? document.getElementById('messageInput') : document.getElementById('replyInput');
+            const chatbox = document.getElementById('chatbox');
+
+            const message = inputElement.value.trim();
+            if (message !== '') {
+                const profileImageSrc = type === 'sent' ? 'hello.jpg' : 'hi.jpg';
+                appendMessage(`${type === 'sent' ? 'You' : 'Bot'}: ${message}`, type, profileImageSrc);
+
+                inputElement.value = '';
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } else {
+                // Show validation error for empty message
+                inputElement.style.border = '1px solid #e74c3c';
+            }
+        }
+
+        function appendMessage(text, type, profileImageSrc) {
+            const chatbox = document.getElementById('chatbox');
+            const messageElement = document.createElement('div');
+            const imageElement = document.createElement('img');
+            imageElement.src = profileImageSrc;
+            imageElement.classList.add('profileImage');
+
+            messageElement.classList.add('message', type);
+            if (type === 'sent') {
+                messageElement.appendChild(imageElement);
+            }
+            messageElement.innerHTML += `<span>${text}</span>`;
+            if (type === 'received') {
+                messageElement.appendChild(imageElement);
+            }
+
+            chatbox.appendChild(messageElement);
+        }
+
+        function clearValidation(inputId) {
+            document.getElementById(inputId).style.border = '1px solid #ccc';
+        }
+    </script>
+</body>
+</html>
